@@ -17,7 +17,8 @@ body {
 }
 
 #root {
-  max-width: 1400px;
+  max-width: 95%;
+  /* Wider layout */
   margin: 0 auto;
   padding: 2rem;
   display: flex;
@@ -47,20 +48,24 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  flex: 1;
+  /* Removed flex: 1 to stop filling entire screen height */
 }
 
 .editors-wrapper {
   display: flex;
   gap: 1.5rem;
-  flex: 1;
-  min-height: 500px;
+  height: 60vh;
+  /* Fixed height relative to viewport, making them shorter than "full screen" */
+  min-height: 400px;
+  max-height: 800px;
 }
 
 @media (max-width: 768px) {
   .editors-wrapper {
     flex-direction: column;
-    min-height: 800px; /* Give enough space when stacked */
+    height: auto;
+    min-height: 800px;
+    /* Still need height when stacked */
   }
 }
 
@@ -123,7 +128,8 @@ body {
 .editor-container {
   flex: 1;
   position: relative;
-  min-height: 0; /* Important for flex child scroll */
+  min-height: 0;
+  /* Important for flex child scroll */
 }
 
 /* Customize scrollbars for Monaco */
