@@ -1,33 +1,51 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { encode } from '@toon-format/toon'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [jsonInput, setJsonInput] = useState('')
+  const [toonOutput, setToonOutput] = useState('')
+  const [error, setError] = useState<string | null>(null)
+
+  const handleConvert = () => {
+    setError(null)
+    try {
+      if (!jsonInput.trim()) {
+        setToonOutput('')
+        return
+      }
+      const parsed = JSON.parse(jsonInput)
+      const encoded = encode(parsed)
+      setToonOutput(encoded)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Invalid JSON input')
+      setToonOutput('')
+    }
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+      <h1>JSON to TOON Converter</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <div className="converter-container">
+          <div className="textarea-container">
+            <textarea
+              placeholder="Paste your JSON here..."
+              value={jsonInput}
+              onChange={(e) => setJsonInput(e.target.value)}
+            />
+            <textarea
+              readOnly
+              placeholder="TOON output will appear here..."
+              value={toonOutput}
+            />
+          </div>
+          <button className="convert-btn" onClick={handleConvert}>
+            Convert to TOON
+          </button>
+          {error && <p className="error">{error}</p>}
+        </div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }

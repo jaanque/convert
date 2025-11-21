@@ -40,3 +40,48 @@
 .read-the-docs {
   color: #888;
 }
+
+.converter-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.textarea-container {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  justify-content: center;
+}
+
+textarea {
+  width: 400px;
+  height: 300px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-family: monospace;
+  resize: vertical;
+}
+
+.error {
+  color: #ff4444;
+  margin-top: 10px;
+}
+
+button.convert-btn {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  cursor: pointer;
+  background-color: #646cff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+button.convert-btn:hover {
+  background-color: #535bf2;
+}
